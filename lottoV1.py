@@ -22,10 +22,36 @@ def fill_ticket(tkt):
     tkt = gen_nums()
     return tkt
 
+def save(num, pr):
+    try:
+        f = open("lotto_results.ext", "a")
+    except:
+        print("Error with file handling")
+    else:
+        f.writelines(str(num) + " " + str(pr) + "\n")
+        f.close()
+def view():
+    try:
+        f = open("lotto_results.ext", "r")
+    except:
+        print("File not found")
+    else:
+        print(f.read())
+        f.close()
+
 def main():
     powerBallTicket = list()
     powerBallTicket = fill_ticket(powerBallTicket)
     print("The Power Ball Winning Numbers:")
     print("Play: ", powerBallTicket[:5], " Power Ball: ", powerBallTicket[-1])
+    choice = input("Do you want to save this result?")
+    choice.lower()
+    if choice =="yes" or choice =="y":
+        save(powerBallTicket[:5], powerBallTicket[-1])
+
+    choice = input("Do you want to see previous results?")
+    choice.lower()
+    if choice == "yes" or choice == "y":
+        view()
 
 main()
